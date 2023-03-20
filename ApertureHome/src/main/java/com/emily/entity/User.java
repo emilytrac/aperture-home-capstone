@@ -1,0 +1,30 @@
+package com.emily.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+//@Entity
+//@Table(name="user")
+public class User {
+	
+//	@Id
+	private int userId;
+	private String userEmail;
+	private String firstName;
+	private String lastName;
+	private String userPassword;
+	
+	// id is an auto increment field so does not need to be in the constructor - can be implemented later to be able to add users
+	
+//	public User(String userEmail, String firstName, String lastName, String userPassword) {
+//		this.userEmail = userEmail;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.userPassword = userPassword;
+//	}
+
+}
