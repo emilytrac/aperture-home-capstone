@@ -49,8 +49,16 @@ public class ConsumerServiceImpl implements ConsumerService {
 	}
 
 	@Override
-	public void deleteProduct(String productName) {
-		restTemplate.delete("http://localhost:8084/products/" + productName);
+	public boolean deleteProduct(String productName) {
+		HttpHeaders headers = new HttpHeaders();
+	    HttpEntity<String> entity = new HttpEntity<String>(headers);
+	    
+	    String deleted = restTemplate.exchange("http://localhost:8084/products/" + productName, HttpMethod.DELETE, entity, String.class).toString();
+		
+	    if("Product deleted".equals(deleted))
+	    	return true;
+	    else
+	    	return false;
 	}
 
 	@Override
@@ -70,7 +78,7 @@ public class ConsumerServiceImpl implements ConsumerService {
 
 	@Override
 	public ProductList generateProductReport() {
-		ProductList products = restTemplate.getForObject("http://localhost:8084/reportprods/", ProductList.class);
+		ProductList products = restTemplate.getForObject("http://localhost:8084/reports/", ProductList.class);
 		return products;
 	}
 

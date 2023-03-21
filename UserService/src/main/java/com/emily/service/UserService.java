@@ -4,6 +4,6 @@ import com.emily.entity.User;
 
 public interface UserService {
 	
-	User loginCheck(String userEmail, String userPassword);
+	public User loginCheck(String userEmail, String userPassword);
 
 }

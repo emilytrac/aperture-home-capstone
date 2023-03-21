@@ -23,7 +23,7 @@ public class Product {
 	private double pricePerItem;
 	private int quantitySold;
 	
-	// id not required as it is an auto increment
+	// id not required as it is an auto increment - product name must be unique
 
 	public Product(String productName, String productCategory, int quantityAvailable, double pricePerItem, int quantitySold) {
 		//super();

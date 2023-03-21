@@ -1,7 +1,5 @@
 package com.emily.service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -16,35 +14,36 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao productDao;
 
+	// getting all products in alphabetical order to display
+	
 	@Override
 	public ProductList getAllProducts() {
-		ProductList productList = new ProductList();
-		productList.setProducts(productDao.findAll());
-		return productList;
+		try {
+			ProductList productList = new ProductList();
+			productList.setProducts(productDao.findAll(Sort.by("productName").ascending()));
+			return productList;
+		} catch(Exception e) {
+			return null;
+		}
 	}
-
-//	@Override
-//	public Product getProductByName(String productName) {
-//		return productDao.findByProductName(productName);
-//	}
-
-//	@Override
-//	public ProductList getProductByCategory(String productCategory) {
-//		ProductList productList = new ProductList();
-//		productList.setProducts(productDao.findByProductCategory(productCategory));
-//		return productList;
-//	}
+	
+	// searching by keyword
 	
 	@Override
 	public ProductList getByKeyword(String keyword) {
-		ProductList productList = new ProductList();
-		productList.setProducts(productDao.findByKeyword(keyword));
-		return productList;
+		try {
+			ProductList productList = new ProductList();
+			productList.setProducts(productDao.findByKeyword(keyword));
+			return productList;
+		} catch(Exception e) {
+			return null;
+		}
 	}
 
 	// checking the product doesn't already exist before adding - unique constraint on product name
+	
 	@Override
-	public Product addProduct(Product product) throws SQLIntegrityConstraintViolationException{
+	public Product addProduct(Product product) {
 		try {
 			if(productDao.findByProductName(product.getProductName()) == null) {
 				productDao.save(product);
@@ -56,57 +55,53 @@ public class ProductServiceImpl implements ProductService {
 			return null;
 		}
 	}
+	
+	// deleting product by name - unique constraint on product name
 
 	@Override
 	public boolean deleteProductByName(String productName) {
-		Product product = productDao.findByProductName(productName);
-		if(product != null) {
-			productDao.delete(product);
-			return true;
-		} else {
+		try {
+			Product product = productDao.findByProductName(productName);
+			if(product != null) {
+				productDao.delete(product);
+				return true;
+			} else {
+				return false;
+			}
+		} catch(Exception e) {
 			return false;
-		}
+		}	
 	}
+	
+	// updating quantity by name - unique constraint on product name
 
 	@Override
-	public Product updateQuantityByProduct(String productName, int quantity) {
-		Product product = productDao.findByProductName(productName);
-		if(product != null) {
-			product.setQuantityAvailable(product.getQuantityAvailable() + quantity);
-			productDao.save(product);
-			return product;
-		} else {
+	public Product updateQuantityByName(String productName, int quantity) {
+		try {
+			Product product = productDao.findByProductName(productName);
+			if(product != null) {
+				product.setQuantityAvailable(product.getQuantityAvailable() + quantity);
+				productDao.save(product);
+				return product;
+			} else {
+				return null;
+			}
+		} catch(Exception e) {
 			return null;
 		}
 	}
-
-	// could potentially use maps here
-//	@Override
-//	public ProductReport generateProductReport(String productName) {
-//		Product product = productDao.findByProductName(productName);
-//		if(product != null) {
-//			int quantityAvailable = product.getQuantityAvailable();
-//			int quantitySold = product.getQuantitySold();
-//			double pricePerItem = product.getPricePerItem();
-//			double totalSales = product.getPricePerItem() * product.getQuantitySold();
-//			String needToReorder = "No";
-//			if (quantityAvailable < 50) 
-//				needToReorder = "Reorder now";
-//			if (quantityAvailable > 50 && quantityAvailable < 100)
-//				needToReorder = "Reorder soon";
-//			
-//			ProductReport productReport = new ProductReport(productName, quantityAvailable,
-//					quantitySold, pricePerItem, totalSales, needToReorder);
-//			return productReport;
-//		}
-//		return null;
-//	}
+	
+	// getting all products in quantity ascending order - will show products which need to be reordered at the top
 
 	@Override
-	public ProductList generateProductReport() {
-		ProductList productList = new ProductList();
-		productList.setProducts(productDao.findAll(Sort.by("quantityAvailable").ascending()));
-		return productList;
+	public ProductList quantityAscending() {
+		try {
+			ProductList productList = new ProductList();
+			productList.setProducts(productDao.findAll(Sort.by("quantityAvailable").ascending()));
+			return productList;
+		} catch(Exception e) {
+			return null;
+		}
 	}
 
 }

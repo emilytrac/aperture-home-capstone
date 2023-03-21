@@ -13,7 +13,7 @@ public interface ConsumerService {
 	public Product addNewProduct(String productName, String productCategory, 
 			int quantityAvailable, double pricePerItem, int quantitySold);
 	
-	public void deleteProduct(String productName);
+	public boolean deleteProduct(String productName);
 	
 	public Product updateProduct(String productName, int quantity);
 	

@@ -30,7 +30,7 @@ public class PdfExport {
 	
 	private void writeTableHeader(PdfPTable table) {
 		PdfPCell cell = new PdfPCell();
-		cell.setBackgroundColor(Color.GREEN);
+		cell.setBackgroundColor(Color.pink);
 		cell.setPadding(5);
 		
 		Font font = FontFactory.getFont(FontFactory.HELVETICA);
@@ -69,7 +69,7 @@ public class PdfExport {
 		document.open();
 		Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 		font.setSize(18);
-		font.setColor(Color.GREEN);
+		font.setColor(Color.BLACK);
 		
 		Paragraph p = new Paragraph("List of Products", font);
 		p.setAlignment(Paragraph.ALIGN_CENTER);
@@ -78,7 +78,7 @@ public class PdfExport {
 		
 		PdfPTable table = new PdfPTable(5);
         table.setWidthPercentage(100f);
-        table.setWidths(new float[] {1.5f, 3.5f, 3.0f, 3.0f, 1.5f});
+        table.setWidths(new float[] {2.5f, 2.5f, 2.5f, 2.5f, 2.5f});
         table.setSpacingBefore(10);
          
         writeTableHeader(table);

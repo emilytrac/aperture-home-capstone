@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500');
+
+* {
+	/* background-image: url("../images/background.jpg"); */
+	font-family: "Montserrat", sans-serif;
+}
+
+.navbar navbar-expand-lg bg-body-tertiary {
+	font-weight: lighter;
+}
+
+.navbar {
+	padding-top: 0.9rem;
+	padding-bottom: 0.9rem;
+}
+
+nav .navbar-nav li a{
+  color: white;
+}
+
+nav .navbar-brand {
+ color: white;
+}

@@ -12,11 +12,11 @@ import com.emily.entity.Product;
 @Repository
 public interface ProductDao extends JpaRepository<Product, Integer> {
 	
-	Product findByProductName(String productName);
+	public Product findByProductName(String productName);
 
-//	List<Product> findByProductCategory(String productCategory);
+	// custom SQL method to be able to search by either product or category
 	
 	@Query(value = "select * from product where productName like %:keyword% or productCategory like %:keyword%", nativeQuery = true)
-	List<Product> findByKeyword(@Param("keyword") String keyword);
+	public List<Product> findByKeyword(@Param("keyword") String keyword);
 	
 }

@@ -7,20 +7,18 @@ import com.emily.entity.ProductList;
 
 public interface ProductService {
 	
-	ProductList getAllProducts();
+	// ProductList class aids later when calling Rest API to return object
 	
-//	Product getProductByName(String productName);
-//	
-//	ProductList getProductByCategory(String productCategory);
+	public ProductList getAllProducts();
 	
-	ProductList getByKeyword(String keyword);
+	public ProductList getByKeyword(String keyword);
 	
-	Product addProduct(Product product) throws SQLIntegrityConstraintViolationException;
+	public Product addProduct(Product product) throws SQLIntegrityConstraintViolationException;
 	
-	boolean deleteProductByName(String productName);
+	public boolean deleteProductByName(String productName);
 	
-	Product updateQuantityByProduct(String productName, int quantity);
+	public Product updateQuantityByName(String productName, int quantity);
 	
-	ProductList generateProductReport();
+	public ProductList quantityAscending();
 
 }

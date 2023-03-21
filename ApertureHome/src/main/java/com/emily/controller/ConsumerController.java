@@ -37,6 +37,7 @@ public class ConsumerController {
 	}
 	
 	// navigating to home page if login is successful - otherwise prompted to enter details again
+	
 	@RequestMapping("/login")
 	public ModelAndView getHomeController(@RequestParam("userEmail") String userEmail, @RequestParam("userPassword") String userPassword, HttpSession session) {
 		ModelAndView modelAndView=new ModelAndView();
@@ -54,13 +55,14 @@ public class ConsumerController {
 			modelAndView.setViewName("homepage");
 		// login fails
 		} else {
-			modelAndView.addObject("message", "Invalid user credentials, please try again!");
+			modelAndView.addObject("message", "Invalid user credentials, please try again");
 			modelAndView.setViewName("index");
 		}
 		return modelAndView;
 	}
 	
-	// navigating to homepage once in the app
+	// navigating to homepage once in the app - from any page within the app
+	
 	@RequestMapping("/homepage")
 	public ModelAndView getHomepageController() {
 		ModelAndView modelAndView=new ModelAndView();
@@ -135,15 +137,15 @@ public class ConsumerController {
 		ModelAndView modelAndView=new ModelAndView();
 		
 		consumerService.deleteProduct(productName);
-	
-		String message = "Product deleted";
 		
+		String message = "Product deleted";
+			
 		modelAndView.addObject("message", message);
-		modelAndView.setViewName("update");
+		modelAndView.setViewName("delete");
 		return modelAndView;
 	}
 	
-	// controller to search inventory
+	// controller to search inventory by either product name or category
 	
 	@RequestMapping("/search")
 	public ModelAndView searchInventory(@RequestParam("keyword") String keyword) {
@@ -174,9 +176,11 @@ public class ConsumerController {
 	@GetMapping(path = "/reports", produces = MediaType.APPLICATION_PDF_VALUE)
 	public void reportResource(HttpServletResponse response) throws DocumentException, IOException {
 		
+		// getting list of products to add to the report
 		ProductList products = consumerService.generateProductReport();
 		List<Product> listOfProducts = products.getProducts();
 		
+		// setting the name of the pdf file to the current date-time for version control
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 		String currentDateTime = dateFormatter.format(new Date());
 		
@@ -184,6 +188,7 @@ public class ConsumerController {
 		String headerValue = "attachment; filename=products_" +currentDateTime + ".pdf";
 		response.setHeader(headerKey, headerValue);
 		
+		// calling pdf entity class to export the pdf
 		PdfExport exporter = new PdfExport(listOfProducts);
 		exporter.export(response);
 		
