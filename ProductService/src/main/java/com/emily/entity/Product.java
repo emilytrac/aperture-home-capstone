@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 @Table(name="product")
 public class Product {
 	
+	/* productId is the primary key in MySQL table
+	field names match up with fields in the database */
 	@Id
 	private int productId;
 	private String productName;
@@ -23,8 +25,8 @@ public class Product {
 	private double pricePerItem;
 	private int quantitySold;
 	
-	// id not required as it is an auto increment - product name must be unique
-
+	/* custom constructor
+	id not required as it is an auto increment - product name must be unique */
 	public Product(String productName, String productCategory, int quantityAvailable, double pricePerItem, int quantitySold) {
 		//super();
 		this.productName = productName;

@@ -12,10 +12,12 @@
 <body>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		type="text/javascript" th:src="@{js/reorder.js}"></script>
 	<!-- <div class="bg-image"> -->
 	<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: rgba(40,119,79, 1);">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Aperture Home</a>
+			<a class="navbar-brand">Aperture Home</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -29,7 +31,7 @@
 					<li class="nav-item"><a class="nav-link" href="./reports">Generate
 							Report</a></li>
 					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" role="button"
+						class="nav-link dropdown-toggle" role="button"
 						data-bs-toggle="dropdown" aria-expanded="false"> Inventory
 							Actions </a>
 						<ul class="dropdown-menu">
@@ -53,8 +55,9 @@
 			</div>
 		</div>
 	</nav>
-	<!-- 		<h1 th:text="Welcome ' +${session.user.firstName}"></h1> -->
+<!-- 	<h5 th:text="'Welcome ' +${session.user.firstName}"></h5> -->
 <!-- 	<h1>Aperture Product Inventory</h1> -->
+	<div class="bg-image">
 	<table class="table table-success table-striped">
 		<thead>
 			<tr>
@@ -63,6 +66,7 @@
 				<th scope="col">Quantity Available</th>
 				<th scope="col">Price per Item</th>
 				<th scope="col">Quantity Sold</th>
+				<th scope="col">Reorder</th>
 			</tr>
 		</thead>
 		<tbody class="table-group-divider">
@@ -70,11 +74,15 @@
 				<td th:text="${product.productName}"></td>
 				<td th:text="${product.productCategory}"></td>
 				<td th:text="${product.quantityAvailable}"></td>
-				<td th:text="${product.pricePerItem}"></td>
+				<td th:text="'$'+${product.pricePerItem}"></td>
 				<td th:text="${product.quantitySold}"></td>
+				<td>
+				<button class="btn btn-light" type="button" th:onclick="showAlert()">Submit Request</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>
+	</div>
 	<!-- </div> -->
 </body>
 </html>

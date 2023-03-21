@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 @Table(name="user")
 public class User {
 	
+	/* userId is the primary key in MySQL table
+	field names match up with fields in the database */
 	@Id
 	private int userId;
 	private String userEmail;

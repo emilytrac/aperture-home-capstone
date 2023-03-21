@@ -11,17 +11,17 @@ body,html {
 } 
 
 .bg-image {
-	background-image: url('../images/background.jpg'); 
-	filter: blue(8px);
-	-webkit-filter: blur(8px);
+	background-image: url('../images/homepage.jpg'); 
+/* 	filter: blue(8px);
+	-webkit-filter: blur(8px); */
 	height: 100%; 
 	background-size: cover;  
 	background-position: center;
 	background-repeat: no-repeat;
 }
 
-.login {
-	background-color: rgba(40,119,79, 0.7);
+.action {
+	background-color: rgba(40,119,79, 0.9);
 	color: white;
 	border-radius: 25px;
 	position: absolute;
@@ -30,16 +30,9 @@ body,html {
 	transform: translate(-50%, -50%);
 	z-index: 2;
 	width: 40%;
-	height: 40%;
-	padding: 40px;
+	height: 55%;
+	padding: 20px;
 	text-align: center;
- 	display: grid;
-	justify-content: center;
-}
-
-form .h1 {
-	display: grid;
-	justify-content: center;
 }
 
 form .mb-3 {

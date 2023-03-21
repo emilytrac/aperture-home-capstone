@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 //@Table(name="product")
 public class Product {
 	
+	/* Same POJO class as in the product service no need to map to database
+	as all interaction handled within the product service */
 //	@Id
 	private int productId;
 	private String productName;

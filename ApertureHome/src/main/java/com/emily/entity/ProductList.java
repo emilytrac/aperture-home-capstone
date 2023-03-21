@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductList {
 	
+	// Same POJO class as in the product service to be able to reference
 	List<Product> products;
 	
 }

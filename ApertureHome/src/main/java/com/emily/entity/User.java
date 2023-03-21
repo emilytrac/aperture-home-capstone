@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 //@Table(name="user")
 public class User {
 	
+	/* Same POJO class as in the user service no need to map to database
+	as all interaction handled within the user service */
 //	@Id
 	private int userId;
 	private String userEmail;

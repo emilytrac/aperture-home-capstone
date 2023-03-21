@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductList {
 	
+	/* Lombok handles creation of the constructor - reduce boilerplate code
+	having an ProductList object will assist in Rest Apis */
 	List<Product> products;
 	
 }

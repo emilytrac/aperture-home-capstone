@@ -1,8 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:500');
+@import
+	url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap')
+	;
 
 * {
-	/* background-image: url("../images/background.jpg"); */
-	font-family: "Montserrat", sans-serif;
+	font-family: 'Quicksand', sans-serif;
+	font-weight: lighter;
+	box-sizing: border-box;
+}
+
+body, html {
+	height: 100%
 }
 
 .navbar navbar-expand-lg bg-body-tertiary {
@@ -14,10 +21,29 @@
 	padding-bottom: 0.9rem;
 }
 
-nav .navbar-nav li a{
-  color: white;
+nav .navbar-nav li a {
+	color: white;
+}
+
+nav .navbar-nav li a:hover {
+	color: black;
 }
 
 nav .navbar-brand {
- color: white;
+	color: white;
 }
+
+nav .navbar-nav .dropdown-menu a {
+	color: #D592B0;
+}
+
+.bg-image {
+	background-image: url('../images/homepage.jpg');
+	/* 	filter: blue(8px);
+	-webkit-filter: blur(8px); */
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+

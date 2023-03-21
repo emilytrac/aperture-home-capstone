@@ -26,18 +26,21 @@ import com.lowagie.text.DocumentException;
 
 @Controller
 public class ConsumerController {
+	
+	// Creating the view for the user to interact with!
 
+	// Will automatically allow access to ConsumerServiceImpl methods
 	@Autowired
 	private ConsumerService consumerService;
 	
-	// showing login page 
+	// requestmapping creates actions for href in html pages to show new view
 	@RequestMapping("/")
 	public ModelAndView getLoginController() {
+		// returns index.html and all associated formatting on localhost:8086
 		return new ModelAndView("index");
 	}
 	
 	// navigating to home page if login is successful - otherwise prompted to enter details again
-	
 	@RequestMapping("/login")
 	public ModelAndView getHomeController(@RequestParam("userEmail") String userEmail, @RequestParam("userPassword") String userPassword, HttpSession session) {
 		ModelAndView modelAndView=new ModelAndView();
@@ -45,19 +48,25 @@ public class ConsumerController {
 			
 		// successful login
 		if (user != null) {
+			// creating user session and setting attribute
 			modelAndView.addObject("user", user);
 			session.setAttribute("user", user);
 			
+			// using service to get all products to be shown on the homepage of app
 			ProductList products = consumerService.showAllProducts();
 			List<Product> listOfProducts = products.getProducts();
+			// adding products to the view - formatted in html
 			modelAndView.addObject("products", listOfProducts);
 			
+			// sets view to show as homepage.html
 			modelAndView.setViewName("homepage");
 		// login fails
 		} else {
+			// setting view to be login page again if login fails with message
 			modelAndView.addObject("message", "Invalid user credentials, please try again");
 			modelAndView.setViewName("index");
 		}
+		// return either homepage.html or index.html
 		return modelAndView;
 	}
 	
@@ -67,10 +76,12 @@ public class ConsumerController {
 	public ModelAndView getHomepageController() {
 		ModelAndView modelAndView=new ModelAndView();
 		
+		// using service to get all products to be shown on the homepage of app
 		ProductList products = consumerService.showAllProducts();
 		List<Product> listOfProducts = products.getProducts();
 		modelAndView.addObject("products", listOfProducts);
 		
+		// sets view to show as homepage.html and returns it
 		modelAndView.setViewName("homepage");
 		return modelAndView;
 	}
@@ -79,6 +90,7 @@ public class ConsumerController {
 	
 	@RequestMapping("/addItem") 
 	public ModelAndView addProductController() {
+		// sets view to show as addnew.html and returns it
 		return new ModelAndView("addnew");
 	}
 	
@@ -86,15 +98,19 @@ public class ConsumerController {
 	public ModelAndView processAddController(@RequestParam("productName") String productName, @RequestParam("productCategory") String productCategory, @RequestParam("quantityAvailable") int quantityAvailable, 
 			@RequestParam("pricePerItem") double pricePerItem, HttpSession session) {
 		ModelAndView modelAndView=new ModelAndView();
+		// use service to add a new product
 		Product product = consumerService.addNewProduct(productName, productCategory, quantityAvailable, pricePerItem, 0);
 		String message;
 		
+		// return relevant message dependent on whether product object is returned or null
 		if(product != null) 
 			message = "Product added.";
 		else
 			message = "Something went wrong, this product may already exist.";
 		
+		// add message to the view
 		modelAndView.addObject("message", message);
+		// sets view to show as addnew.html and returns it
 		modelAndView.setViewName("addnew");
 		return modelAndView;
 	}
@@ -103,6 +119,7 @@ public class ConsumerController {
 	
 	@RequestMapping("/updateItem") 
 	public ModelAndView updateProductController() {
+		// sets view to show as update.html and returns it
 		return new ModelAndView("update");
 	}
 	
@@ -111,16 +128,21 @@ public class ConsumerController {
 		ModelAndView modelAndView=new ModelAndView();
 		String message;
 		
+		// checks for a positive amount of additional stock
 		if (quantity <= 0) {
 			message = "Please enter a positive amount";
 		} else {
+			// return relevant message dependent on whether product object is returned or null
+			// uses service method
 			if (consumerService.updateProduct(productName, quantity) != null) {
 				message = "Inventory stock of " + productName + " increased by " + quantity;
 			} else {
 				message = "Something went wrong. This product may not exist";
 			}
 		}
+		// add message to the view
 		modelAndView.addObject("message", message);
+		// sets view to show as update.html and returns it
 		modelAndView.setViewName("update");
 		return modelAndView;
 	}
@@ -129,6 +151,7 @@ public class ConsumerController {
 	
 	@RequestMapping("/deleteItem") 
 	public ModelAndView deleteProductController() {
+		// sets view to show as delete.html and returns it
 		return new ModelAndView("delete");
 	}
 	
@@ -136,11 +159,14 @@ public class ConsumerController {
 	public ModelAndView processDeleteController(@RequestParam("productName") String productName) {
 		ModelAndView modelAndView=new ModelAndView();
 		
+		// using service method to delete the product
 		consumerService.deleteProduct(productName);
 		
 		String message = "Product deleted";
 			
+		// add message to the view
 		modelAndView.addObject("message", message);
+		// sets view to show as delete.html and returns it
 		modelAndView.setViewName("delete");
 		return modelAndView;
 	}
@@ -150,16 +176,20 @@ public class ConsumerController {
 	@RequestMapping("/search")
 	public ModelAndView searchInventory(@RequestParam("keyword") String keyword) {
 		ModelAndView modelAndView=new ModelAndView();
+		// instantiating new ProductList
 		ProductList products = new ProductList();
 		
 		try {
+			// if keyword is entered, use service method to return list with relevant products
 			if (keyword != null) 
 				products = consumerService.searchByKeyword(keyword);
 				List<Product> listOfProducts = products.getProducts();
 				modelAndView.addObject("products", listOfProducts);
 				
+				// sets view to show as homepage.html and returns it
 				modelAndView.setViewName("homepage");
 				return modelAndView;
+		// if exception occurs i.e. nothing entered in the search bar, all products returnes		
 		} catch (Exception e) {
 			products = consumerService.showAllProducts();
 			List<Product> listOfProducts = products.getProducts();
