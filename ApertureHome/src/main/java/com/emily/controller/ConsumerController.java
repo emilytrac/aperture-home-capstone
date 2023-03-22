@@ -33,7 +33,7 @@ public class ConsumerController {
 	@Autowired
 	private ConsumerService consumerService;
 	
-	// requestmapping creates actions for href in html pages to show new view
+	// requestmapping creates actions for href in HTML pages to show new view
 	@RequestMapping("/")
 	public ModelAndView getLoginController() {
 		// returns index.html and all associated formatting on localhost:8086
@@ -71,7 +71,6 @@ public class ConsumerController {
 	}
 	
 	// navigating to homepage once in the app - from any page within the app
-	
 	@RequestMapping("/homepage")
 	public ModelAndView getHomepageController() {
 		ModelAndView modelAndView=new ModelAndView();
@@ -94,6 +93,7 @@ public class ConsumerController {
 		return new ModelAndView("addnew");
 	}
 	
+	// user is prompted to enter parameters for the creation of a new product object
 	@RequestMapping("/added")
 	public ModelAndView processAddController(@RequestParam("productName") String productName, @RequestParam("productCategory") String productCategory, @RequestParam("quantityAvailable") int quantityAvailable, 
 			@RequestParam("pricePerItem") double pricePerItem, HttpSession session) {
@@ -123,6 +123,7 @@ public class ConsumerController {
 		return new ModelAndView("update");
 	}
 	
+	// user is prompted to enter a product and amount to update by
 	@RequestMapping("/updated")
 	public ModelAndView processUpdateController(@RequestParam("productName") String productName, @RequestParam("quantity") int quantity) {
 		ModelAndView modelAndView=new ModelAndView();
@@ -155,6 +156,7 @@ public class ConsumerController {
 		return new ModelAndView("delete");
 	}
 	
+	// user is prompted to enter a product to delete
 	@RequestMapping("/deleted")
 	public ModelAndView processDeleteController(@RequestParam("productName") String productName) {
 		ModelAndView modelAndView=new ModelAndView();
@@ -189,12 +191,14 @@ public class ConsumerController {
 				// sets view to show as homepage.html and returns it
 				modelAndView.setViewName("homepage");
 				return modelAndView;
-		// if exception occurs i.e. nothing entered in the search bar, all products returnes		
+		// if exception occurs i.e. nothing entered in the search bar, all products returned		
 		} catch (Exception e) {
+			// returning a list of all products
 			products = consumerService.showAllProducts();
 			List<Product> listOfProducts = products.getProducts();
 			modelAndView.addObject("products", listOfProducts);
 			
+			// sets view to show as homepage.html and returns it
 			modelAndView.setViewName("homepage");
 			return modelAndView;
 		}

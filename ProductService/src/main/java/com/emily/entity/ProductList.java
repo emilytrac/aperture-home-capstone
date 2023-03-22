@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 public class ProductList {
 	
 	/* Lombok handles creation of the constructor - reduce boilerplate code
-	having an ProductList object will assist in Rest Apis */
+	having an ProductList object assists in calling RESTful services in the 
+	main application controller */
 	List<Product> products;
 	
 }

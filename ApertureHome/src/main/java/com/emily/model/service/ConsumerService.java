@@ -6,8 +6,8 @@ import com.emily.entity.User;
 
 public interface ConsumerService {
 	
-	/* all methods will use a RestTemplate to connect to the APIs created
-	in the user and product services */
+	/* all methods will use a RestTemplate instance to connect to the APIs 
+	 * created in the user and product services */
 	
 	// checking for valid user
 	public User loginCheck(String userEmail, String userPassword);
@@ -28,8 +28,7 @@ public interface ConsumerService {
 	// searching products
 	public ProductList searchByKeyword(String keyword);
 	
-	/* generating a product report to give a downloadable pdf to the user 
-	of the application */
+	// generating a product report to allow the user to download a PDF
 	ProductList generateProductReport();
 
 }
