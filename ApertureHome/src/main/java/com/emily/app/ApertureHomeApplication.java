@@ -23,7 +23,7 @@ public class ApertureHomeApplication {
 	
 	/* Creating a RestTemplate bean so that the application is able to consume RESTful web 
 	 * services - this allows the application to call on the APIs from the services 
-	 * by performing HTTP requests*/
+	 * by performing HTTP requests */
 	@Bean
 	public RestTemplate getTemplate() {
 		return new RestTemplate();

@@ -3,12 +3,14 @@
 	;
 
 * {
+	/* font used by entire webpage for consistency */
 	font-family: 'Quicksand', sans-serif;
 	font-weight: lighter;
 	box-sizing: border-box;
 }
 
 body, html {
+	/* body has 100% of the browser height */
 	height: 100%
 }
 
@@ -16,33 +18,39 @@ body, html {
 	font-weight: lighter;
 }
 
+/* padding out the navbar for more space above and below links/search bar */
 .navbar {
 	padding-top: 0.9rem;
 	padding-bottom: 0.9rem;
 }
 
+/* custom colour for font of navbar links */
 nav .navbar-nav li a {
 	color: white;
 }
 
+/* custom colour for font when navbar links are hover over */
 nav .navbar-nav li a:hover {
 	color: black;
 }
 
+/* custom colour for font of Aperture brand on navbar */
 nav .navbar-brand {
 	color: white;
 }
 
+/* custom colour for font in dropdown box */
 nav .navbar-nav .dropdown-menu a {
 	color: #D592B0;
 }
 
 .bg-image {
-	background-image: url('../images/homepage.jpg');
-	/* 	filter: blue(8px);
-	-webkit-filter: blur(8px); */
-	height: 100%;
-	background-size: cover;
+	/* getting image from static folder in project */
+	background-image: url('../images/homepage.jpg'); 
+	/* centering and scaling to fit entire screen without repeat
+	using full height of body  */
+	height: 100%; 
+	background-size: cover;  
 	background-position: center;
 	background-repeat: no-repeat;
 }

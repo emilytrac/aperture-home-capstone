@@ -14,10 +14,7 @@ body,html {
 
 .bg-image {
 	/* getting image from static folder in project */
-	background-image: url('../images/background.jpg'); 
-	/* blurring the image */
-	filter: blur(8px);
-	-webkit-filter: blur(8px);
+	background-image: url('../images/homepage.jpg'); 
 	/* centering and scaling to fit entire screen without repeat
 	using full height of body  */
 	height: 100%; 
@@ -26,10 +23,10 @@ body,html {
 	background-repeat: no-repeat;
 }
 
-/* Centering the login box on the webpage, adding a custom backgound color */
-.login {
+/* Centering the box on the webpage, adding a custom backgound color */
+.action {
 	/* green backgorund colour with some opacity */
-	background-color: rgba(40,119,79, 0.7);
+	background-color: rgba(40,119,79, 0.9);
 	/* text colour */
 	color: white;
 	/* adding curve to the corners of the login box */
@@ -40,10 +37,10 @@ body,html {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 50%;
-	height: 50%;
+	width: 40%;
+	height: 40%;
 	/* padding to stop text being right at the top of the box */
-	padding: 50px;
+	padding: 25px;
 	/* aligning text in the center of the login box */
 	text-align: center;
 /*  	display: grid;

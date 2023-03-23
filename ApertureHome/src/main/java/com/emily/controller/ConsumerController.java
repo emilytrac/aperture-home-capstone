@@ -27,20 +27,28 @@ import com.lowagie.text.DocumentException;
 @Controller
 public class ConsumerController {
 	
-	// Creating the view for the user to interact with!
+	/* Creating the view for the user to interact with! All HTML, CSS and JS files 
+	 * can be found in the static folder of this project under resources along
+	 * with the images used for backgrounds. All images were obtained from Unsplash
+	 * which is a free, open-source platform for high quality images. Model and View - 
+	 * The model refers to managing the data of the application and the view is what is
+	 * presented to the user. This controller will respond to user input on the view
+	 * and the model (Service class methods and RESTful APIs) will deal with creating 
+	 * the response */
 
 	// Will automatically allow access to ConsumerServiceImpl methods
 	@Autowired
 	private ConsumerService consumerService;
 	
-	// requestmapping creates actions for href in HTML pages to show new view
+	// @RequestMapping refers to the href in HTML pages and are is used to show new view
 	@RequestMapping("/")
 	public ModelAndView getLoginController() {
 		// returns index.html and all associated formatting on localhost:8086
 		return new ModelAndView("index");
 	}
 	
-	// navigating to home page if login is successful - otherwise prompted to enter details again
+	/* navigating to home page if login is successful - otherwise prompted to enter details again
+	@RequestParam specified which values the user needs to enter to process the request */
 	@RequestMapping("/login")
 	public ModelAndView getHomeController(@RequestParam("userEmail") String userEmail, @RequestParam("userPassword") String userPassword, HttpSession session) {
 		ModelAndView modelAndView=new ModelAndView();
@@ -129,7 +137,7 @@ public class ConsumerController {
 		ModelAndView modelAndView=new ModelAndView();
 		String message;
 		
-		// checks for a positive amount of additional stock
+		// checks for a non zero amount of stock
 		if (quantity == 0) {
 			message = "Please enter a value other than 0";
 		} else {

@@ -3,18 +3,24 @@
 <head>
 <title>Functionality</title>
 <meta charset="ISO-8859-1">
+<!-- for multiple device compatibility -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap link -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<!-- Linking to own CSS file -->
 <link th:href="@{css/navbar.css}" rel="stylesheet" />
 <link th:href="@{css/add.css}" rel="stylesheet" />
 </head>
 <body>
+	<!-- Bootstrap link -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- <div class="bg-image"> -->
-	<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: rgba(40,119,79, 1);">
+	<!-- Navbar - based on Bootstrap element with custom formatting -->
+	<nav class="navbar navbar-expand-lg bg-body-tertiary"
+		style="background-color: rgba(40, 119, 79, 1);">
 		<div class="container-fluid">
 			<a class="navbar-brand">Aperture Home</a>
 			<button class="navbar-toggler" type="button"
@@ -24,69 +30,89 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<!-- Generating options to click on the navbar -->
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<!-- Will take back to homepage (homepage.html) from anywhere in the app -->
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="./homepage">Home</a></li>
+					<!-- Will generate inventory and sales report -->
 					<li class="nav-item"><a class="nav-link" href="./reports">Generate
 							Report</a></li>
+					<!-- Creating dropdown to be able to select from multiple options -->
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" role="button"
 						data-bs-toggle="dropdown" aria-expanded="false"> Inventory
 							Actions </a>
 						<ul class="dropdown-menu">
+							<!-- Leads to add an item page (addnew.html) -->
 							<li><a class="dropdown-item" href="./addItem">Add an
 									Item</a></li>
+							<!-- Leads to update a item page (update.html) -->
 							<li><a class="dropdown-item" href="./updateItem">Update
 									an Item</a></li>
+							<!-- Leads to delete an item page (delete.html) -->
 							<li><a class="dropdown-item" href="./deleteItem">Delete
 									an Item</a></li>
 						</ul></li>
+					<!-- Log out link to lead back to the login page (index.html) -->
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="./">Log Out</a></li>
 				</ul>
+				<!-- Creating a search button to allow the user to enter a keyword to search by -->
 				<form class="d-flex" role="search" th:action="@{/search}"
 					method="get">
 					<input class="form-control me-2" type="search"
-						placeholder="Search..." name="keyword"
-						aria-label="Search">
+						placeholder="Search..." name="keyword" aria-label="Search">
+					<!-- Button to submit the search -->
 					<button class="btn btn-light" type="submit">Search</button>
 				</form>
 			</div>
 		</div>
 	</nav>
+	<!-- div to format background image -->
 	<div class="bg-image"></div>
+	<!-- div to be able to enter fields to carry out an action - based on Bootstrap form element -->
 	<div class="action">
-	<h4>Enter Product Details</h4>
-	<br></br>
-	<form action="./added" method="post">
-		<div class="mb-3">
-			<label for="exampleInputEmail1" class="form-label">Product
-				Name: </label> <input type="text" name="productName" class="form-control"
-				id="exampleInputEmail1" aria-describedby="emailHelp" required>
-		</div>
-		<div class="mb-3">
-			<label for="exampleInputPassword1" class="form-label">Product
-				Category: </label> <select name="productCategory">
-				<option value="home decorations">Home Decorations</option>
-				<option value="textiles and rugs">Textiles and Rugs</option>
-				<option value="art and prints">Art and Prints</option>
-				<option value="organisation">Organisation</option>
-				<option value="plant decorations">Plant Decorations</option>
-			</select>
-		</div>
-		<div class="mb-3">
-			<label for="exampleInputPassword1" class="form-label">Number
-				of Items: </label> <input type="number" name="quantityAvailable"
-				class="form-control" id="exampleInputPassword1" required>
-		</div>
-		<div class="mb-3">
-			<label for="exampleInputPassword1" class="form-label">Price
-				per Item: </label> <input type="number" step="0.01" name="pricePerItem"
-				class="form-control" id="exampleInputPassword1" required>
-		</div>
-		<button type="submit" class="btn btn-light">Submit</button>
-		<h6 th:text="${message}"></h6>
-	</form>
+		<!-- Information for the user - more user friendly -->
+		<h4>Enter Product Details</h4>
+		<br></br>
+		<form action="./added" method="post">
+			<div class="mb-3">
+				<!-- Box for user to enter the product -->
+				<label for="productInputBox" class="form-label">Product
+					Name: </label> <input type="text" name="productName" class="form-control"
+					id="productInput" required>
+				<!-- Required handles error in case checkbox is not selected-->
+			</div>
+			<div class="mb-3">
+				<!-- Creating a dropdown box for the user to select a product category -->
+				<label for="categoryInput" class="form-label">Product
+					Category: </label> <select name="productCategory" required>
+					<option value="home decorations">Home Decorations</option>
+					<option value="textiles and rugs">Textiles and Rugs</option>
+					<option value="art and prints">Art and Prints</option>
+					<option value="organisation">Organisation</option>
+					<option value="plant decorations">Plant Decorations</option>
+				</select>
+			</div>
+			<div class="mb-3">
+				<!-- Box for user to enter number available -->
+				<label for="quantityInputBox" class="form-label">Number
+					of Items: </label> <input type="number" name="quantityAvailable"
+					class="form-control" id="quantityInput" required>
+				<!-- Required handles error in case field is submitted empty-->
+			</div>
+			<div class="mb-3">
+				<!-- Box for user to enter the price of the product -->
+				<label for="priceInputBox" class="form-label">Price
+					per Item: </label> <input type="number" step="0.01" name="pricePerItem"
+					class="form-control" id="priceInput" required>
+				<!-- Required handles error in case field is submitted empty-->
+			</div>
+			<button type="submit" class="btn btn-light">Submit</button>
+			<!--  Allow message to display depending on outcome of task -->
+			<h6 th:text="${message}"></h6>
+		</form>
 	</div>
 </body>
 </html>

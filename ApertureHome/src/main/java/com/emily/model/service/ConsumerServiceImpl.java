@@ -14,6 +14,9 @@ import com.emily.entity.User;
 @Service
 public class ConsumerServiceImpl implements ConsumerService {
 	
+	/* Within this class, the REST APIs created in the user and product services are 
+	 * called upon to provide a response via a HTTP request */
+	
 	// will allow RESTful API calls
 	@Autowired 
 	public RestTemplate restTemplate;
