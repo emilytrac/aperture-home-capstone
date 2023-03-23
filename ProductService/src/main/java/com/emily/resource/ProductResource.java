@@ -67,12 +67,12 @@ public class ProductResource {
 			return "Product not deleted";
 	}
 	
-	/* Creating an API path to update (PUT) a product in the database
+	/* Creating API paths to update (PUT) a product in the database
 	 * Will return either a Product object or null
 	 * Product object can be mapped to a JSON format
 	 */
-	@PutMapping(path = "/products/{productName}/{quantity}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Product updateProductResource(@PathVariable("productName") String productName, @PathVariable("quantity") int quantity) {
+	@PutMapping(path = "/quantities/{productName}/{quantity}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Product updateQuantityResource(@PathVariable("productName") String productName, @PathVariable("quantity") int quantity) {
 		return productService.updateQuantityByName(productName, quantity);
 	}
 	

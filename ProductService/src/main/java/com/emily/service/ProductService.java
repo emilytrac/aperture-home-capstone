@@ -19,7 +19,7 @@ public interface ProductService {
 	// method to delete a product by name
 	public boolean deleteProductByName(String productName);
 	
-	// method to update stock by name
+	// method to update quantity by name
 	public Product updateQuantityByName(String productName, int quantity);
 	
 	// method to return a list of products will increasing stock levels

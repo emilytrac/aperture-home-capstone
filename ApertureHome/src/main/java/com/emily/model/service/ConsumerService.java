@@ -23,7 +23,7 @@ public interface ConsumerService {
 	public boolean deleteProduct(String productName);
 	
 	// updating stock level
-	public Product updateProduct(String productName, int quantity);
+	public Product updateQuantity(String productName, int quantity);
 	
 	// searching products
 	public ProductList searchByKeyword(String keyword);

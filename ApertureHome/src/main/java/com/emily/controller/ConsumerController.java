@@ -130,13 +130,13 @@ public class ConsumerController {
 		String message;
 		
 		// checks for a positive amount of additional stock
-		if (quantity <= 0) {
-			message = "Please enter a positive amount";
+		if (quantity == 0) {
+			message = "Please enter a value other than 0";
 		} else {
 			// return relevant message dependent on whether product object is returned or null
 			// uses service method
-			if (consumerService.updateProduct(productName, quantity) != null) {
-				message = "Inventory stock of " + productName + " increased by " + quantity;
+			if (consumerService.updateQuantity(productName, quantity) != null) {
+				message = "Inventory stock of " + productName + " updated by " + quantity;
 			} else {
 				message = "Something went wrong. This product may not exist";
 			}

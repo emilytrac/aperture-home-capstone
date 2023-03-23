@@ -74,14 +74,14 @@ public class ConsumerServiceImpl implements ConsumerService {
 	}
 
 	@Override
-	public Product updateProduct(String productName, int quantity) {
+	public Product updateQuantity(String productName, int quantity) {
 		 HttpHeaders headers = new HttpHeaders();
 		// setting response type of the HTTP request
 	     HttpEntity<Product> entity = new HttpEntity<Product>(headers);
 	   
 	     /* using the exchange method to call the API to update the product stock,
 	     allows a return value - in this case the object body of the API response  */
-	     Product product = restTemplate.exchange("http://localhost:8084/products/" + productName + "/" + quantity, HttpMethod.PUT, entity, Product.class).getBody();
+	     Product product = restTemplate.exchange("http://localhost:8084/quantities/" + productName + "/" + quantity, HttpMethod.PUT, entity, Product.class).getBody();
 	     return product;
 	}
 	

@@ -85,14 +85,23 @@ public class ProductServiceImpl implements ProductService {
 		try {
 			// checking that the product exists
 			Product product = productDao.findByProductName(productName);
-			if(product != null) {
-				// set new value for quantity if product does exist
+			// if product does exist and quantity is greater than 0
+			if(product != null && quantity > 0) {
+				// set new value for quantity to reflect restock
 				product.setQuantityAvailable(product.getQuantityAvailable() + quantity);
 				// use built in JPA .save() method to update database
 				productDao.save(product);
 				return product;
+				// if product does exist and quantity is less than 0
+			} else if(product!= null && quantity < 0) {
+				// update both available and sold to reflect that items have been sold
+				product.setQuantityAvailable(product.getQuantityAvailable() + quantity);
+				product.setQuantitySold(product.getQuantitySold() - quantity);
+				// use built in JPA .save() method to update database
+				productDao.save(product);
+				return product;
 			} else {
-				// return null if the product does not exist
+				// return null if the product does not exist or 0 entered
 				return null;
 			}
 		} catch(Exception e) {
