@@ -7,21 +7,21 @@
 	box-sizing: border-box;
 }
 
-body,html { 
+body,html {
 	/* body has 100% of the browser height */
 	height:100%
-} 
+}
 
 .bg-image {
 	/* getting image from static folder in project */
-	background-image: url('../images/background.jpg'); 
+	background-image: url('../images/background.jpg');
 	/* blurring the image */
 	filter: blur(8px);
 	-webkit-filter: blur(8px);
 	/* centering and scaling to fit entire screen without repeat
 	using full height of body  */
-	height: 100%; 
-	background-size: cover;  
+	height: 100%;
+	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 }

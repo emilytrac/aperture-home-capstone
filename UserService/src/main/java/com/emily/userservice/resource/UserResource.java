@@ -3,13 +3,11 @@ package com.emily.userservice.resource;
 import com.emily.userservice.entity.User;
 import com.emily.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:8086")
 public class UserResource {
 
     /* creating an instance of the userService to access loginCheck method

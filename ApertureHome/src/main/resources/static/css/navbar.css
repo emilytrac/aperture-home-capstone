@@ -46,12 +46,11 @@ nav .navbar-nav .dropdown-menu a {
 
 .bg-image {
 	/* getting image from static folder in project */
-	background-image: url('../images/homepage.jpg'); 
+	background-image: url('../images/homepage.jpg');
 	/* centering and scaling to fit entire screen without repeat
 	using full height of body  */
-	height: 100%; 
-	background-size: cover;  
+	height: 100%;
+	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 }
-

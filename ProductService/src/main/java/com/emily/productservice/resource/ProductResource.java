@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestController
+@RequestMapping("/products")
+@CrossOrigin(origins = "http://localhost:8086")
 public class ProductResource {
 
     /* creating an instance of the productService to access methods
@@ -22,7 +24,7 @@ public class ProductResource {
      * Will return either a ProductList object or null
      * ProductList object can be mapped to a JSON format
      */
-    @GetMapping(path = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public ProductList getAllProductsResource() {
         return productService.getAllProducts();
     }
@@ -31,7 +33,7 @@ public class ProductResource {
      * Will return a ProductList with items containing keyword or null
      * ProductList object can be mapped to a JSON format
      */
-    @GetMapping(path = "/searches/{keyword}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/searches/{keyword}")
     public ProductList getProductsResource(@PathVariable("keyword") String keyword) {
         return productService.getByKeyword(keyword);
     }
@@ -41,7 +43,7 @@ public class ProductResource {
      * Potential SQL error thrown if product already exists - handled in service
      * Product object can be mapped to a JSON format, String returned is plain text
      */
-    @PostMapping(path = "/products", produces = MediaType.TEXT_PLAIN_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     public String addProductResource(@RequestBody Product product) throws SQLIntegrityConstraintViolationException {
         if(productService.addProduct(product) != null)
             return "Product added";
@@ -53,7 +55,7 @@ public class ProductResource {
      * Will return a String signifying the outcome
      * String returned is plain text
      */
-    @DeleteMapping(path = "/products/{productName}", produces = MediaType.TEXT_PLAIN_VALUE)
+    @DeleteMapping(path = "/{productName}")
     public String deleteProductResource(@PathVariable("productName") String productName) {
         if(productService.deleteProductByName(productName))
             return "Product deleted";
@@ -65,7 +67,7 @@ public class ProductResource {
      * Will return either a Product object or null
      * Product object can be mapped to a JSON format
      */
-    @PutMapping(path = "/quantities/{productName}/{quantity}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/quantities/{productName}/{quantity}")
     public Product updateQuantityResource(@PathVariable("productName") String productName, @PathVariable("quantity") int quantity) {
         return productService.updateQuantityByName(productName, quantity);
     }
@@ -75,7 +77,7 @@ public class ProductResource {
      * Will return either a ProductList object or null
      * ProductList object can be mapped to a JSON format
      */
-    @GetMapping(path = "/reports", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/reports")
     public ProductList reportsResource() {
         return productService.quantityAscending();
     }
